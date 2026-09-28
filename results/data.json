@@ -1,0 +1,64 @@
+{
+  "validation": {
+    "rows": 64000,
+    "missing_values": {
+      "channel": 0,
+      "conversion": 0,
+      "history": 0,
+      "history_segment": 0,
+      "mens": 0,
+      "newbie": 0,
+      "recency": 0,
+      "segment": 0,
+      "spend": 0,
+      "visit": 0,
+      "womens": 0,
+      "zip_code": 0
+    },
+    "duplicate_rows": 6562,
+    "recency_in_1_12": true,
+    "history_positive": true,
+    "binary_flags_ok": true,
+    "spend_nonneg": true,
+    "spend_only_if_converted": true,
+    "segments": [
+      "Mens E-Mail",
+      "No E-Mail",
+      "Womens E-Mail"
+    ],
+    "zip_code_misspelled_surburban": 28776,
+    "history_at_floor_29_99": 7947,
+    "note": "duplicate_rows are distinct customers sharing the $29.99 history floor and identical categorical features; they are kept."
+  },
+  "arm_summary": [
+    {
+      "segment": "Mens E-Mail",
+      "customers": 21307,
+      "visit_rate": 0.18275684047496127,
+      "conversion_rate": 0.01253109306800582,
+      "spend_per_customer": 1.4226165110057738,
+      "revenue": 30311.69000000002
+    },
+    {
+      "segment": "No E-Mail",
+      "customers": 21306,
+      "visit_rate": 0.10616727682343002,
+      "conversion_rate": 0.005726086548390125,
+      "spend_per_customer": 0.6527893551112363,
+      "revenue": 13908.33
+    },
+    {
+      "segment": "Womens E-Mail",
+      "customers": 21387,
+      "visit_rate": 0.151400383410483,
+      "conversion_rate": 0.008837144059475383,
+      "spend_per_customer": 1.077201571047833,
+      "revenue": 23038.110000000004
+    }
+  ],
+  "split_sizes": {
+    "train": 38400,
+    "test": 12800,
+    "val": 12800
+  }
+}

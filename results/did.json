@@ -1,0 +1,520 @@
+{
+  "source_facts": {
+    "source_url": "https://raw.githubusercontent.com/facebookincubator/GeoLift/main/vignettes/GeoLift_Walkthrough.Rmd",
+    "y_definition": "number of conversions/KPI in each day/location (vignette wording)",
+    "data_is_simulated": true,
+    "data_note": "Vignette: 'we will use simulated data of 40 US cities across 90 days'",
+    "treated_locations": [
+      "chicago",
+      "portland"
+    ],
+    "treatment_window_timestamps": [
+      91,
+      105
+    ],
+    "campaign_budget_usd": 65000,
+    "campaign_length_days": 15,
+    "geolift_published": {
+      "method": "GeoLift (augmented synthetic control, default settings), 95% level",
+      "lift_pct": 5.4,
+      "att_per_location_day": 155.556,
+      "incremental_y": 4667,
+      "p_value": 0.01,
+      "p_value_text_pct": 1.1,
+      "note": "Rounded values as quoted in the vignette prose; the vignette gives no CI in text."
+    }
+  },
+  "data_checks": {
+    "n_locations": 40,
+    "n_days": 105,
+    "rows": 4200,
+    "balanced": true,
+    "missing_values": 0,
+    "duplicate_location_date": 0,
+    "contiguous_daily": true,
+    "date_min": "2021-01-01",
+    "date_max": "2021-04-15",
+    "treatment_start_date": "2021-04-01",
+    "treatment_end_date": "2021-04-15",
+    "y_min": 6,
+    "y_nonnegative": true,
+    "pretest_equals_first_90_days_of_test": true
+  },
+  "cell_means_per_location_day": {
+    "treated_pre_mean": 2916.7,
+    "treated_post_mean": 3023.9,
+    "control_pre_mean": 4489.126900584795,
+    "control_post_mean": 4341.250877192982
+  },
+  "n_placebo_subsets": 703,
+  "permutation_lift_pct_quantiles_2.5_97.5": [
+    -15.436452145733043,
+    12.84754018197723
+  ],
+  "estimators": [
+    {
+      "method": "2x2 DiD, levels",
+      "att": 255.07602339181312,
+      "att_ci": [
+        -357.3859486452236,
+        867.5379954288499
+      ],
+      "lift": 0.09212431904186325,
+      "lift_ci": null,
+      "p": 0.41051136363636365,
+      "p_kind": "permutation (703 placebo pairs)",
+      "incremental": 7652.280701754394
+    },
+    {
+      "method": "Ratio DiD, % lift (primary)",
+      "att": 203.27881598774027,
+      "att_ci": [
+        -208.48909673971139,
+        615.1856460092401
+      ],
+      "lift": 0.07206881134551413,
+      "lift_ci": [
+        -0.0645,
+        0.25539999999999996
+      ],
+      "p": 0.3522727272727273,
+      "p_kind": "permutation (703 placebo pairs)",
+      "incremental": 6098.364479632208
+    },
+    {
+      "method": "TWFE, levels",
+      "att": 255.07602339180977,
+      "att_ci": [
+        -267.163430172592,
+        777.3154769562116
+      ],
+      "lift": 0.09212431904186193,
+      "lift_ci": null,
+      "p": 0.3384158647524942,
+      "p_kind": "cluster-robust (2 treated clusters; unreliable)",
+      "incremental": 7652.280701754293
+    },
+    {
+      "method": "TWFE, log Y",
+      "att": null,
+      "att_ci": null,
+      "lift": 0.10413447187127889,
+      "lift_ci": [
+        -0.07156049691534794,
+        0.3130774034539472
+      ],
+      "p": 0.26259518002946036,
+      "p_kind": "cluster-robust (unreliable)",
+      "incremental": null
+    },
+    {
+      "method": "Synthetic control",
+      "att": 122.725851603494,
+      "att_ci": [
+        -261.87637726828206,
+        507.3387483355526
+      ],
+      "lift": 0.04230213193900312,
+      "lift_ci": [
+        -0.0797,
+        0.2016
+      ],
+      "p": 0.48011363636363635,
+      "p_kind": "permutation (703 placebo pairs)",
+      "incremental": 3681.77554810482
+    },
+    {
+      "method": "DiD, top-10 correlated controls",
+      "att": 249.79665825289513,
+      "att_ci": [
+        -152.46554621848753,
+        652.0276962899048
+      ],
+      "lift": 0.09004590942728741,
+      "lift_ci": [
+        -0.04800000000000004,
+        0.2748999999999999
+      ],
+      "p": 0.21732954545454544,
+      "p_kind": "permutation (703 placebo pairs)",
+      "incremental": 7493.899747586854
+    },
+    {
+      "method": "GeoLift published (benchmark)",
+      "att": 155.556,
+      "att_ci": null,
+      "lift": 0.054000000000000006,
+      "lift_ci": null,
+      "p": 0.01,
+      "p_kind": "GeoLift conformal/permutation, as published",
+      "incremental": 4667
+    }
+  ],
+  "twfe": {
+    "levels": {
+      "coef": 255.07602339180977,
+      "se_cluster": 266.4535969455357,
+      "p_cluster_normal": 0.3384158647524942,
+      "ci_cluster_normal": [
+        -267.163430172592,
+        777.3154769562116
+      ],
+      "ci_cluster_t_1df": [
+        -3130.537932088339,
+        3640.689978871959
+      ]
+    },
+    "log": {
+      "coef": 0.09906174466860139,
+      "se_cluster": 0.08842601286755201,
+      "p_cluster_normal": 0.26259518002946036,
+      "ci_cluster_normal": [
+        -0.07425005584827594,
+        0.27237354518547874
+      ],
+      "ci_cluster_t_1df": [
+        -1.0244972788301325,
+        1.2226207681673351
+      ],
+      "pct_lift": 0.10413447187127889,
+      "pct_ci_cluster_normal": [
+        -0.07156049691534794,
+        0.3130774034539472
+      ]
+    },
+    "warning": "2 treated clusters: cluster-robust SEs are badly biased downward; treat as indicative only."
+  },
+  "event_study": {
+    "ks": [
+      -12,
+      -11,
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      0,
+      1
+    ],
+    "coef": [
+      0.06380760656733941,
+      0.038733029101119754,
+      -0.0014056720372419562,
+      -0.0018395283987312668,
+      -0.023785663946384074,
+      -0.008773174280522933,
+      -0.0024971873278719636,
+      -0.0006504564854768295,
+      -0.04585106202055944,
+      0.01851562095929571,
+      0.048110648921491306,
+      0.029219235300917808,
+      0.1804529980064113
+    ],
+    "se_cluster": [
+      0.019789964295197134,
+      0.024206144400162766,
+      0.03343238121875168,
+      0.032299859189327665,
+      0.03842123513905224,
+      0.01076517437435323,
+      0.012746810763361956,
+      0.03771084946215795,
+      0.020588150796094953,
+      0.026775605342120985,
+      0.032163885367771615,
+      0.04202468831240332,
+      0.10612982055543692
+    ],
+    "lead_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "wald_cluster_F": 25.307991259993823,
+    "wald_cluster_p": 2.202546568847698e-14,
+    "wald_hc1_F": 1.63818239255434,
+    "wald_hc1_p": 0.08158139268023495,
+    "wald_df": [
+      11,
+      4043
+    ],
+    "pretrend_perm_p": 0.7272727272727273,
+    "lead_rms_log_points": 0.031602914221047586,
+    "placebo_band": [
+      [
+        -0.17083550115076035,
+        -0.15216699467669947,
+        -0.10171468520670987,
+        -0.08941089144211796,
+        -0.06763757245833174,
+        -0.08522100793212885,
+        -0.10198078223786876,
+        -0.08679380700559886,
+        -0.10044909003440004,
+        -0.3234144347166144,
+        -0.5181569501275216,
+        -0.13081873516050405,
+        -0.4990403064135395
+      ],
+      [
+        0.1716201385614435,
+        0.11886398142660567,
+        0.08772214487474835,
+        0.07563795893928806,
+        0.07731221416373735,
+        0.08785866608302739,
+        0.14920712934623417,
+        0.09408185972203685,
+        0.1159103968531425,
+        0.1032097611349869,
+        0.1140706498214493,
+        0.10801911622435906,
+        0.22577181555802328
+      ]
+    ]
+  },
+  "synthetic_control": {
+    "pre_rmspe": 97.7409622766055,
+    "pre_rmspe_pct_of_mean": 3.3510804085646626,
+    "post_rmspe": 234.38873748523903,
+    "post_pre_rmspe_ratio": 2.398060465395484,
+    "rmspe_ratio_perm_p": 0.3252840909090909,
+    "post_gap_per_location_day": 122.725851603494,
+    "top_weights": [
+      [
+        "miami",
+        0.21141715326461236
+      ],
+      [
+        "cincinnati",
+        0.2102284622173316
+      ],
+      [
+        "baton rouge",
+        0.16073877421169475
+      ],
+      [
+        "dallas",
+        0.11290473004738066
+      ],
+      [
+        "honolulu",
+        0.08702861348076196
+      ]
+    ],
+    "placebo_pre_rmspe_median": 167.49872168300644
+  },
+  "matched_controls": [
+    "atlanta",
+    "reno",
+    "phoenix",
+    "houston",
+    "cincinnati",
+    "philadelphia",
+    "las vegas",
+    "nashville",
+    "san diego",
+    "denver"
+  ],
+  "power": [
+    {
+      "effect": 0.0,
+      "power": 0.05,
+      "ci_low": 0.034093745243849435,
+      "ci_high": 0.0727681611715476
+    },
+    {
+      "effect": 0.01,
+      "power": 0.048,
+      "ci_low": 0.03246520694135317,
+      "ci_high": 0.07042719683589006
+    },
+    {
+      "effect": 0.02,
+      "power": 0.09,
+      "ci_low": 0.0679425478891394,
+      "ci_high": 0.11830941128933344
+    },
+    {
+      "effect": 0.03,
+      "power": 0.136,
+      "ci_low": 0.10871544340723721,
+      "ci_high": 0.16883507644877283
+    },
+    {
+      "effect": 0.04,
+      "power": 0.224,
+      "ci_low": 0.1896389712599083,
+      "ci_high": 0.26256966467486853
+    },
+    {
+      "effect": 0.05,
+      "power": 0.326,
+      "ci_low": 0.28637531603524735,
+      "ci_high": 0.3682779544453728
+    },
+    {
+      "effect": 0.06,
+      "power": 0.432,
+      "ci_low": 0.3892622537365844,
+      "ci_high": 0.47577465656618667
+    },
+    {
+      "effect": 0.07,
+      "power": 0.53,
+      "ci_low": 0.4861905914242533,
+      "ci_high": 0.5733519481480536
+    },
+    {
+      "effect": 0.08,
+      "power": 0.626,
+      "ci_low": 0.5827786661985682,
+      "ci_high": 0.6673000000051207
+    },
+    {
+      "effect": 0.09,
+      "power": 0.714,
+      "ci_low": 0.6728768354985485,
+      "ci_high": 0.7518599467839072
+    },
+    {
+      "effect": 0.1,
+      "power": 0.788,
+      "ci_low": 0.7500478841824444,
+      "ci_high": 0.8215604957117014
+    },
+    {
+      "effect": 0.11,
+      "power": 0.838,
+      "ci_low": 0.8031477342378299,
+      "ci_high": 0.8676982116101608
+    },
+    {
+      "effect": 0.12,
+      "power": 0.88,
+      "ci_low": 0.8485804013755894,
+      "ci_high": 0.9056250998736309
+    },
+    {
+      "effect": 0.13,
+      "power": 0.902,
+      "ci_low": 0.8727939491335182,
+      "ci_high": 0.9250760811353937
+    },
+    {
+      "effect": 0.14,
+      "power": 0.924,
+      "ci_low": 0.8974035863260315,
+      "ci_high": 0.9441309729625722
+    },
+    {
+      "effect": 0.15,
+      "power": 0.94,
+      "ci_low": 0.9156389368747802,
+      "ci_high": 0.9576516435190539
+    }
+  ],
+  "mde_80pct": 0.1024,
+  "false_positive_rate_at_zero": 0.05,
+  "business": {
+    "incremental_conversions": 6098.364479632208,
+    "incremental_ci95": [
+      -6254.672902191342,
+      18455.569380277204
+    ],
+    "budget_usd": 65000,
+    "cost_per_incremental_conversion_usd": 10.65859546720962,
+    "cpic_ci95": [
+      3.5219720757823456,
+      null
+    ],
+    "geolift_implied_cpic": 13.927576601671309
+  },
+  "headline": {
+    "did_att_per_location_day": {
+      "estimate": 203.27881598774027,
+      "ci95": [
+        -208.48909673971139,
+        615.1856460092401
+      ],
+      "perm_p": 0.3522727272727273,
+      "note": "ratio-DiD counterfactual; 2x2 level DiD in `estimators`"
+    },
+    "in_time_placebo": {
+      "p_value": 0.012987012987012988,
+      "obs_log_points": 0.06611227518907026,
+      "n_windows": 76,
+      "placebo_abs_max_log_points": 0.054978210942427885,
+      "note": "same treated pair, overlapping pre-period 15-day windows; windows are dependent"
+    },
+    "did_att_level_2x2_per_location_day": {
+      "estimate": 255.07602339181312,
+      "ci95": [
+        -357.3859486452236,
+        867.5379954288499
+      ],
+      "perm_p": 0.41051136363636365
+    },
+    "did_pct_lift": {
+      "estimate": 0.07206881134551413,
+      "ci95": [
+        -0.0645,
+        0.25539999999999996
+      ],
+      "perm_p": 0.3522727272727273
+    },
+    "pretrend_test": {
+      "permutation_p": 0.7272727272727273,
+      "wald_cluster_p": 2.202546568847698e-14,
+      "wald_hc1_p": 0.08158139268023495
+    },
+    "synthetic_control_pct_lift": {
+      "estimate": 0.04230213193900312,
+      "ci95": [
+        -0.0797,
+        0.2016
+      ],
+      "perm_p": 0.48011363636363635,
+      "pre_rmspe": 97.7409622766055
+    },
+    "geolift_published": {
+      "method": "GeoLift (augmented synthetic control, default settings), 95% level",
+      "lift_pct": 5.4,
+      "att_per_location_day": 155.556,
+      "incremental_y": 4667,
+      "p_value": 0.01,
+      "p_value_text_pct": 1.1,
+      "note": "Rounded values as quoted in the vignette prose; the vignette gives no CI in text."
+    },
+    "incremental_conversions": {
+      "estimate": 6098.364479632208,
+      "ci95": [
+        -6254.672902191342,
+        18455.569380277204
+      ]
+    },
+    "cost_per_incremental_conversion_usd": {
+      "estimate": 10.65859546720962,
+      "ci95": [
+        3.5219720757823456,
+        null
+      ],
+      "budget_usd": 65000
+    },
+    "mde_80pct_power_pct": 10.24
+  },
+  "runtime_seconds": 4.842766761779785
+}
